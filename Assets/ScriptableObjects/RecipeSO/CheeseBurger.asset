@@ -17,3 +17,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 89c45e3a04e7fdd4cac56ecaee3dfb42, type: 2}
   - {fileID: 11400000, guid: 75170faf88657484b8f73ff10d6e2356, type: 2}
   recipeName: CheeseBurger
+  recipeCost: 25

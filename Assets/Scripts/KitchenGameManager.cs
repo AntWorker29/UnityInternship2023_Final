@@ -24,8 +24,9 @@ public class KitchenGameManager : MonoBehaviour
     private float waitingToStartTimer = 1f;
     private float countdownToStartTimer = 3f;
     private float gamePlayingTimer;
-    [SerializeField] private float gamePlayingTimerMax = 100f;
+    [SerializeField] private float gamePlayingTimerMax = 210f;
     [SerializeField] private GameObject tutorialGameObject;
+    [SerializeField] private List<GameObject> totalEarningsUIChildren;
     #endregion
 
     #region SUBSCRIPTIONS
@@ -136,6 +137,23 @@ public class KitchenGameManager : MonoBehaviour
     {
         tutorialGameObject.SetActive(false);
         tutorialTimer = 0f;
+    }
+    public void DisableTotalEarningsWindow()
+    {
+        if (IsGamePlaying())
+        {
+            foreach (GameObject gameObjectChild in totalEarningsUIChildren)
+            {
+                gameObjectChild.SetActive(true);
+            }
+        }
+        else
+        {
+            foreach (GameObject gameObjectChild in totalEarningsUIChildren)
+            {
+                gameObjectChild.SetActive(false);
+            }
+        }
     }
     #endregion
 }

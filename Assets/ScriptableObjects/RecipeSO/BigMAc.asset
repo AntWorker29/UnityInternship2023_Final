@@ -19,3 +19,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f8c174239e185e4408c5af4352b851bb, type: 2}
   - {fileID: 11400000, guid: e7c702093e2bc984694f8122ad585266, type: 2}
   recipeName: BigMac
+  recipeCost: 30

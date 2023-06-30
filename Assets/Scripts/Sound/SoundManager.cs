@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     #region FIELDS
     private const string PLAYER_PREFS_SOUND_EFFFECTS = "SoundEffects";
     [SerializeField] private AudioClipsListSO audioClipsListSO;
+    [SerializeField] private StoveCounter stoveCounter;
     public static SoundManager Instance { get; private set; }
     private float volume = 1f;
     #endregion
@@ -25,10 +26,17 @@ public class SoundManager : MonoBehaviour
         BaseCounter.OnAnyObjectPlacedHere += BaseCounter_OnAnyObjectPlacedHere;
         TrashCounter.OnAnyObjectTrashed += Trash_OnAnyObjectTrashed;
         PlayerBehavior.Instance.OnPickedSomething += Player_OnPickedSomething;
+        stoveCounter.OnStateChanged += StoveCounter_OnStateChanged;
     }
     #endregion
 
     #region METHODS
+    private void StoveCounter_OnStateChanged(object sender, System.EventArgs e)
+    {
+        StoveCounter stove = sender as StoveCounter;
+        PlaySound(audioClipsListSO.stoveSizzle, stove.transform.position);
+    }
+
     private void Trash_OnAnyObjectTrashed(object sender, System.EventArgs e)
     {
         TrashCounter trash = sender as TrashCounter;

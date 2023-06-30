@@ -13,6 +13,7 @@ public class StoveCounter : BaseCounter, IProgressBar
         Fried,
         Burned,
     }
+    public event EventHandler OnWarning;
     public event EventHandler<IProgressBar.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
     public class OnStateChangedEventArgs : EventArgs
@@ -67,7 +68,12 @@ public class StoveCounter : BaseCounter, IProgressBar
                     OnProgressChanged?.Invoke(this, new IProgressBar.OnProgressChangedEventArgs
                     {
                         progressNormalized = burnTimer / burningRecipeSO.burningTimerMax
+                        
                     });
+                    if (burnTimer / burningRecipeSO.burningTimerMax > .4f)
+                    {
+                        OnWarning?.Invoke(this, EventArgs.Empty);
+                    }
 
                     if (burnTimer > burningRecipeSO.burningTimerMax)
                     {

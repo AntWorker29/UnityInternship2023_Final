@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
     #region FIELDS
     [SerializeField] private TextMeshProUGUI recipesDeliveredTextNumber;
+    [SerializeField] private TextMeshProUGUI earningsNumber;
     #endregion
 
     #region SUBSCRIPTIONS
@@ -24,6 +26,8 @@ public class GameOverUI : MonoBehaviour
         {
             Show();
             recipesDeliveredTextNumber.text = DeliveryManager.Instance.GetSuccessfulRecipesAmount().ToString();
+            earningsNumber.text = CashEarnedUI.Instance.GetTotalEarningsNumber().ToString();
+            earningsNumber.text = "$ " + earningsNumber.text ;
         } else
         {
             Hide();

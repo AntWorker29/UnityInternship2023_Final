@@ -33,16 +33,17 @@ public class OptionsUI : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        musicScrollbar.value = MusicManager.Instance.GetVolume();
+        soundEffectsScrollbar.value = SoundManager.Instance.GetVolume();
     }
     private void Start()
     {
         KitchenGameManager.Instance.OnGameUnpaused += KitchenGameManager_OnGameUnpaused;
-        musicScrollbar.value = MusicManager.Instance.GetVolume();
-        soundEffectsScrollbar.value = SoundManager.Instance.GetVolume();
-
+      
         soundEffectsScrollbar.onValueChanged.AddListener((float varNormalized) =>
         {
             SoundManager.Instance.ChangeVolume(varNormalized);
+            //StoveCounterSound.Instance.ChangeVolume(varNormalized);
         });
         musicScrollbar.onValueChanged.AddListener((float varNormalized) =>
         {

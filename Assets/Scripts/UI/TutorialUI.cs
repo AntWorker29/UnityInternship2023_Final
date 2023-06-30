@@ -38,7 +38,7 @@ public class TutorialUI : MonoBehaviour
     {
         if (PlayerPrefs.GetInt(playerPrefsFirstPlay, 1) == 0)
         {
-            // if it's not the first time a player plays the game, tutorial.gameObject should be disabled and KitchenGameManager.State.TutorialTime should be deleted(?)
+            // if it's not the first time a player plays the game, tutorial.gameObject should be disabled and KitchenGameManager.State.TutorialTime always skipped
             KitchenGameManager.Instance.DisableTutorial();
         }
         KitchenGameManager.Instance.OnGameUnpaused += KitchenGameManager_OnGameUnpaused;

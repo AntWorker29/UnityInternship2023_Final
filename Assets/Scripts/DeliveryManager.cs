@@ -15,7 +15,11 @@ public class DeliveryManager : MonoBehaviour
     private int waitingRecipesMax = 4;
     private int successfulDeliveredRecipesAmount;
 
-    public event EventHandler OnRecipeSuccess;
+    public event EventHandler<OnRecipeSuccessEventArgs> OnRecipeSuccess;
+    public class OnRecipeSuccessEventArgs : EventArgs
+    {
+        public RecipeSO recipeSO;
+    }
     public event EventHandler OnRecipeFailed;
     public event EventHandler OnRecipeSpawned;
     public event EventHandler OnRecipeCompleted;
@@ -49,7 +53,7 @@ public class DeliveryManager : MonoBehaviour
         for (int i = 0; i < waitingRecipeSOList.Count; i++)
         {
             RecipeSO waitingRecipeSO = waitingRecipeSOList[i];
-            
+
             bool recipeOk = false;
             if (plateKitchenObject.GetKitchenObjectSOList().Count == waitingRecipeSO.kitchenObjectSOList.Count)
             {
@@ -70,7 +74,8 @@ public class DeliveryManager : MonoBehaviour
                 waitingRecipeSOList.RemoveAt(i);
 
                 OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
-                OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
+                OnRecipeSuccess?.Invoke(this,new OnRecipeSuccessEventArgs { recipeSO = waitingRecipeSO });
+
                 return;
             }
         }
